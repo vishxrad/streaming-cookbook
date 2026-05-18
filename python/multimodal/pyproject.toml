@@ -31,6 +31,10 @@ override-dependencies = [
     "langgraph-runtime-inmem==0.29.0.dev1",
 ]
 
+[tool.uv.sources]
+langchain = { git = "https://github.com/langchain-ai/langchain.git", branch = "master", subdirectory = "libs/langchain_v1" }
+langchain-core = { git = "https://github.com/langchain-ai/langchain.git", branch = "master", subdirectory = "libs/core" }
+
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
 

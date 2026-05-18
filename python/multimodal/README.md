@@ -6,7 +6,7 @@ can talk to a Python `langgraph dev` server on port 2024 unchanged.
 
 The graph is a six-way fan-out after a single storyteller pass:
 
-```
+```text
                        storyteller (gpt-4o-mini, three paragraphs)
                               |
        +----------+-----------+-----------+----------+----------+
@@ -93,22 +93,21 @@ pnpm --filter @examples/ui-multimodal dev
 Open the Vite URL and submit a story prompt. The page renders three
 illustrations and three narrations as they stream in parallel.
 
-## Requires `@langchain/langgraph-sdk` with BaseMessage normalization
+## Requires `langchain-core` with constructor-envelope support
 
 The frontend uses `new HumanMessage(prompt)` and ships it through
-`stream.submit(...)`. Older `@langchain/langgraph-sdk` releases call
-`JSON.stringify` on the request body, which invokes
-`BaseMessage.toJSON()` and emits the legacy
+`stream.submit(...)`. The request body passes through `JSON.stringify`,
+which invokes `BaseMessage.toJSON()` and emits the legacy
 `{lc:1, type:"constructor", id:[...], kwargs:{...}}` envelope. Python's
-`langchain_core.messages.utils._convert_to_message` rejects that shape
-with `MESSAGE_COERCION_FAILURE` on the first input.
+older `langchain_core.messages.utils._convert_to_message` rejected that
+shape with `MESSAGE_COERCION_FAILURE` on the first input.
 
-This example assumes a `@langchain/langgraph-sdk` release that
-normalizes `BaseMessage` instances to the canonical
-`{type, content, ...}` dict shape before stringify (see
-[langchain-ai/langgraphjs#2395](https://github.com/langchain-ai/langgraphjs/pull/2395)).
-If you see `MESSAGE_COERCION_FAILURE` in the `langgraph dev` log,
-upgrade `@langchain/langgraph-sdk` in the workspace and reinstall.
+This example points `langchain` and `langchain-core` at the LangChain
+repository's `master` branch until the fix from
+[langchain-ai/langchain#37456](https://github.com/langchain-ai/langchain/pull/37456)
+is available in a released `langchain-core` package. If you see
+`MESSAGE_COERCION_FAILURE` in the `langgraph dev` log, rerun `uv sync`
+from this directory so the git-sourced dependency is installed.
 
 ## Files
 
