@@ -84,7 +84,7 @@ VISUALIZER_STYLE_GUIDE = """Style guide (apply every time):
 - No scary or sharp elements. No weapons."""
 
 NARRATOR_VOICE = "nova"
-NARRATOR_AUDIO_MODEL = "gpt-4o-audio-preview"
+NARRATOR_AUDIO_MODEL = "gpt-audio-1.5"
 NARRATOR_AUDIO_FORMAT = "pcm16"  # OpenAI streams 24 kHz mono 16-bit signed
 NARRATOR_AUDIO_MIME = "audio/pcm"
 
@@ -95,9 +95,9 @@ NARRATOR_SYSTEM = (
     "Speak only the paragraph exactly as written."
 )
 
-IMAGE_MODEL = "gpt-image-1"
+IMAGE_MODEL = "gpt-image-1-mini"
 IMAGE_SIZE = "1024x1024"
-IMAGE_QUALITY = "medium"
+IMAGE_QUALITY = "low"
 
 STORYTELLER_MODEL = "gpt-4o-mini"
 
@@ -175,7 +175,7 @@ class _ImageGenChatModel(BaseChatModel):
 class _NarratorChatModel(BaseChatModel):
     """A chat-model adapter that streams OpenAI's audio-output chat model.
 
-    Uses `gpt-4o-audio-preview` with `modalities=["text", "audio"]` and
+    Uses `gpt-audio-1.5` with `modalities=["text", "audio"]` and
     `audio.format="pcm16"` so the model streams 24 kHz mono PCM16 chunks
     as the audio is synthesized. Each chunk is yielded as a separate
     `ChatGenerationChunk` carrying an `audio` content block — the

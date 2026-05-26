@@ -80,7 +80,7 @@ async function main() {
 
       console.log("Resumed. Waiting for final state...\n");
 
-      for await (const snapshot of values) {
+      for await (const snapshot of thread.values) {
         const state = snapshot as Record<string, unknown>;
         const msgCount = (state.messages as unknown[])?.length ?? 0;
         console.log(`  State snapshot: ${msgCount} message(s)`);

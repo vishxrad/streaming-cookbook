@@ -84,14 +84,17 @@ const visualizerModel = new ChatOpenAI({
   useResponsesApi: true,
 }).bindTools([
   openaiTools.imageGeneration({
+    model: "gpt-image-1-mini",
     size: "1024x1024",
-    quality: "medium",
-    outputFormat: "png",
+    quality: "low",
+    outputFormat: "webp",
+    outputCompression: 80,
+    partialImages: 2,
   }),
 ]);
 
 const narratorModel = new ChatOpenAI({
-  model: "gpt-4o-audio-preview",
+  model: "gpt-audio-1.5",
   modalities: ["text", "audio"],
   audio: { voice: "nova", format: "pcm16" },
   streaming: true,
@@ -231,10 +234,10 @@ const makeVisualizerNode =
     async (state: StoryState) => {
       const paragraph = state.paragraphs[index];
       if (paragraph == null || paragraph.length === 0) return {};
-      const response = await visualizerModel.invoke([
-        new SystemMessage(VISUALIZER_SYSTEM),
-        new HumanMessage(paragraph),
-      ]);
+      const response = await visualizerModel.invoke(
+        [new SystemMessage(VISUALIZER_SYSTEM), new HumanMessage(paragraph)],
+        { tool_choice: { type: "image_generation" } },
+      );
       // Name the message so the client can trace it back to a page slot
       // even when it renders via root-scoped selectors, and strip the
       // base64 image payload so it never hits the persisted checkpoint.

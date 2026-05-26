@@ -151,3 +151,5 @@ __pycache__/
 
 # langgraph dev / langgraph-api scratch directories
 .langgraph_api/
+/*.md
+/*.txt

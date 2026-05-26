@@ -42,7 +42,7 @@ frontend's `MediaAssembler` consumes.
   soft watercolor style guide in the prompt) and yields a single
   `AIMessageChunk` with content `[{type:"image", data:<b64>,
   mime_type:"image/png", encoding:"base64"}]`.
-- **`_NarratorChatModel`** streams `gpt-4o-audio-preview` with
+- **`_NarratorChatModel`** streams `gpt-audio-1.5` with
   `modalities=["text", "audio"]` and `audio.format="pcm16"`. Each
   streamed chunk yields a `ChatGenerationChunk` carrying the PCM16
   bytes as an `audio` content block with `mime_type:"audio/pcm"`.

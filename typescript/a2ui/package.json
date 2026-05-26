@@ -13,13 +13,13 @@
     "@a2ui/markdown-it": "^0.0.4",
     "@a2ui/react": "^0.10.0",
     "@a2ui/web_core": "0.10.0",
-    "@langchain/core": "1.1.47",
+    "@langchain/core": "1.1.48",
     "@langchain/langgraph": "^1.3.2",
-    "@langchain/langgraph-sdk": "^1.9.4",
-    "@langchain/openai": "^1.4.6",
+    "@langchain/langgraph-sdk": "^1.9.6",
+    "@langchain/openai": "^1.4.7",
     "@langchain/protocol": "^0.0.15",
-    "@langchain/react": "^1.0.4",
-    "langchain": "^1.4.1",
+    "@langchain/react": "^1.0.6",
+    "langchain": "^1.4.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "zod": "^4.4.3"
@@ -32,6 +32,6 @@
     "@vitejs/plugin-react": "^6.0.2",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3",
-    "vite": "^8.0.13"
+    "vite": "^8.0.14"
   }
 }

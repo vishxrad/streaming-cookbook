@@ -44,8 +44,9 @@ try {
         console.log(
           `  [tool] ${tc.name}(${JSON.stringify(tc.input).slice(0, 80)})`
         );
-        const status = await tc.status;
-        console.log(`  [tool] ${tc.name} → ${status}`);
+        tc.output.then((result) => {
+          console.log(`  [tool] ${tc.name} → ${JSON.stringify(result).slice(0, 80)}`);
+        });
       }
     })();
   }
