@@ -31,7 +31,7 @@ There is no shared Python workspace file — treat each folder like its own mini
 | `multimodal` | Six-way fan-out story graph (text, images, audio). | `typescript/multimodal` | Python backend only — run `pnpm dev:multimodal` for the React UI. |
 | `a2ui` | ReAct agent with `custom:a2ui` projection. | `typescript/a2ui` | Python backend only — run `pnpm dev:a2ui` for the React UI. |
 | `ui-react` | Reconnect / replay against `langgraph dev`. | `typescript/ui-react` | Python backend only — run `pnpm dev:react` for the React UI. |
-| `react-custom-transport` | Full-stack custom Agent Protocol server + React UI. | `typescript/react-custom-transport` | `LocalThreadSession`, per-thread SSE, `HttpAgentServerAdapter`, tool streaming. **No TypeScript backend required.** |
+| `react-custom-backend` | Full-stack custom Agent Protocol server + React UI. | `typescript/react-custom-backend` | `LocalThreadSession`, per-thread SSE, `HttpAgentServerAdapter`, tool streaming. **No TypeScript backend required.** |
 | `ui-angular` | Minimal chat agent. | `typescript/ui-angular` | Python backend — run the Angular app from `typescript/ui-angular`. |
 | `ui-svelte` | Minimal chat agent. | `typescript/ui-svelte` | Python backend — run the Svelte app from `typescript/ui-svelte`. |
 | `ui-vue` | Minimal chat agent. | `typescript/ui-vue` | Python backend — run the Vue app from `typescript/ui-vue`. |
@@ -68,15 +68,15 @@ uv run langgraph dev --port 2024
 
 Then start the matching frontend from `typescript/` (see each package README for the exact `pnpm` command).
 
-### Full-stack custom transport (port 9123)
+### Full-stack custom backend (port 9123)
 
 ```bash
-cd python/react-custom-transport
+cd python/react-custom-backend
 uv sync
 uv run python src/main.py
 
 # other terminal
-cd python/react-custom-transport/frontend
+cd python/react-custom-backend/frontend
 npm install
 npm run dev
 ```
@@ -94,16 +94,16 @@ Python examples use LangGraph's Python v3 event stream and, for remote scripts, 
 
 - Choose `streaming/basic` when you need raw protocol events and namespaces.
 - Choose `streaming/messages` when building token, reasoning, or tool-call UI.
-- Choose `streaming/custom-transformer` or `react-custom-transport` when you need custom projections or your own HTTP/SSE transport.
+- Choose `streaming/custom-transformer` or `react-custom-backend` when you need custom projections or your own HTTP/SSE backend.
 - Choose `a2ui` when rendering declarative A2UI surfaces from a Python agent.
 - Choose `streaming/subgraphs` or `multimodal` when scoped namespaces matter to the UI.
 - Choose `streaming/subagents` when Deep Agents task delegation is the user-facing concept.
 - Choose `ui-react` when testing browser refresh recovery.
-- Choose `react-custom-transport` when implementing the Agent Protocol without `langgraph dev`.
+- Choose `react-custom-backend` when implementing the Agent Protocol without `langgraph dev`.
 - Choose a `ui-*` backend when validating framework bindings against a Python graph server.
 
 ## Environment Notes
 
 - `python/streaming` uses the **Anthropic** key from the root `.env`.
-- Most UI backends and `react-custom-transport` use the **OpenAI** key.
+- Most UI backends and `react-custom-backend` use the **OpenAI** key.
 - Remote streaming scripts need **langgraph-sdk** with `client.threads.stream()` support (see `streaming/README.md`).

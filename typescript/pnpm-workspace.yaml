@@ -2,7 +2,7 @@ packages:
   - "streaming"
   - "multimodal"
   - "a2ui"
-  - "react-custom-transport"
+  - "react-custom-backend"
   - "ui-react"
   - "ui-angular"
   - "ui-svelte"
