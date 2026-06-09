@@ -1,7 +1,7 @@
 /**
  * Browser-side thread id storage and server bootstrap helpers.
  *
- * Port of the Python example's `frontend/src/threads.ts`. Each tab keeps its
+ * Port of the TypeScript example's `src/app/threads.ts`. Each tab keeps its
  * own thread id in `sessionStorage` and ensures a matching checkpoint row
  * exists via the LangGraph SDK before {@link StreamProvider} hydrates.
  */
@@ -19,7 +19,7 @@ export const API_URL = `${window.location.origin}/api`;
 /** SDK client for pre-mount thread bootstrap (`ensureThreadExists`). */
 const client = new Client({ apiUrl: API_URL });
 
-const STORAGE_KEY = "typescript-react-custom-backend-thread";
+const STORAGE_KEY = "python-react-custom-backend-thread";
 
 /**
  * Read the per-tab thread id from `sessionStorage`, minting one on first visit.

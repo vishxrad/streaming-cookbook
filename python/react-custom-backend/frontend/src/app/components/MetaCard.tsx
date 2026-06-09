@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 
-import { type BaseMessage } from "@langchain/core/messages";
+import { type BaseMessage } from "langchain";
 import { useStreamContext } from "@langchain/react";
 
-import type { agent } from "../../agent/index.js";
 import { TypingDots } from "./StreamingIndicator.js";
 
 function summarizeToolCalls(messages: BaseMessage[]) {
@@ -36,7 +35,7 @@ export function MetaCard({
   threadId: string;
   onNewThread: () => void;
 }) {
-  const stream = useStreamContext<typeof agent>();
+  const stream = useStreamContext();
 
   const messages = useMemo(
     () => stream.messages.filter((message) => message != null),

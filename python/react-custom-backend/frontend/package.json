@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@langchain/core": "1.1.48",
-    "@langchain/react": "^1.0.18",
+    "@langchain/langgraph-sdk": "^1.9.20",
+    "@langchain/react": "^1.0.20",
     "langchain": "^1.4.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"

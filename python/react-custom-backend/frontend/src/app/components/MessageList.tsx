@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 
-import { AIMessage } from "@langchain/core/messages";
+import { AIMessage } from "langchain";
 import { useStreamContext } from "@langchain/react";
 
-import type { agent } from "../../agent/index.js";
 import {
   shouldShowTypingIndicator,
   StreamingIndicator,
@@ -24,7 +23,7 @@ function formatToolArgs(args: Record<string, unknown>) {
 }
 
 export function MessageList() {
-  const stream = useStreamContext<typeof agent>();
+  const stream = useStreamContext();
 
   const messages = useMemo(
     () => stream.messages.filter((message) => message != null),
@@ -41,7 +40,7 @@ export function MessageList() {
       {messages.length === 0 ? (
         <div className="empty-state">
           Send the example prompt to stream assistant tokens, tool calls, and
-          tool results from the TypeScript backend.
+          tool results from the Python backend.
         </div>
       ) : null}
 
@@ -79,8 +78,8 @@ export function MessageList() {
 
       {messages.length === 0 && !stream.isLoading && stream.error ? (
         <div className="error">
-          Could not reach the TypeScript protocol server. Start it with{" "}
-          <code>pnpm dev</code>, then try again.
+          Could not reach the Python protocol server. Start it with{" "}
+          <code>uv run python src/main.py</code>, then try again.
         </div>
       ) : null}
     </section>

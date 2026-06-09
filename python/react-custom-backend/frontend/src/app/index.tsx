@@ -1,12 +1,12 @@
 /**
- * React entry shell for the TypeScript custom-backend chat UI.
+ * React entry shell for the Python custom-backend chat UI.
  *
  * Wires {@link StreamProvider} to a local {@link HttpAgentServerAdapter}
- * (Vite proxies `/api` → the Hono server on port 9123) and bootstraps a
+ * (Vite proxies `/api` → the Starlette server on port 9123) and bootstraps a
  * per-tab thread via {@link ensureThreadReady} before mounting {@link Chat}.
  *
- * Mirrors the Python example's `frontend/src/app/index.tsx`; presentation
- * lives under `./components/`.
+ * Mirrors the TypeScript example's `src/app/index.tsx`; presentation lives
+ * under `./components/`.
  */
 
 import { useEffect, useMemo, useState } from "react";

@@ -58,7 +58,7 @@ The Vite dev server proxies `/api` to the local Hono server on `http://localhost
 - `POST /threads/:threadId/stream` opens a filtered SSE subscription and replays matching buffered events when a cursor is provided.
 - `GET|POST /threads/:threadId/state` reads and updates checkpointed thread state.
 
-`src/app/index.tsx` configures `HttpAgentServerAdapter` with those local paths and passes it to `StreamProvider`. Each browser tab keeps its own thread id in `sessionStorage`, bootstrapped through the LangGraph SDK thread-state routes before the first stream. The SDK handles command submission, SSE parsing, subscription rotation, and projection hooks in the browser.
+`src/app/index.tsx` configures `HttpAgentServerAdapter` with those local paths and passes it to `StreamProvider` (requires `@langchain/react` ≥ 1.0.20 and `@langchain/langgraph-sdk` ≥ 1.9.20 so hydration inherits the transport `apiUrl`). Each browser tab keeps its own thread id in `sessionStorage`, bootstrapped through the LangGraph SDK thread-state routes before the first stream.
 
 `src/server/session.ts` is the server-side counterpart. It buffers protocol events by sequence number, applies subscription filters, and fans matching SSE frames out to active subscribers.
 

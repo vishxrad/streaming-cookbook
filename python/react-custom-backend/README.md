@@ -84,8 +84,14 @@ Through the Vite dev proxy, the frontend calls the same paths under `/api/…`.
 
 **Frontend**
 
-- `frontend/src/threads.ts`: thread id storage and `ensureThreadExists`.
-- `frontend/src/App.tsx`: `StreamProvider` with `apiUrl` `/api` and `/threads/<id>/…` paths.
+- `frontend/src/main.tsx`: React entrypoint.
+- `frontend/src/app/index.tsx`: `StreamProvider`, per-tab thread management, and transport wiring.
+- `frontend/src/app/threads.ts`: thread id storage and server bootstrap helpers.
+- `frontend/src/app/components/Chat.tsx`: chat shell, theme toggle, and composer.
+- `frontend/src/app/components/MessageList.tsx`: streamed messages and tool calls.
+- `frontend/src/app/components/MetaCard.tsx`: thread id, stream status, and tool-call counts.
+
+Requires `@langchain/react` ≥ 1.0.20 and `@langchain/langgraph-sdk` ≥ 1.9.20.
 
 ## TypeScript sibling
 

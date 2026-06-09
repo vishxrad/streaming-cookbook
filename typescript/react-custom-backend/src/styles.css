@@ -211,6 +211,85 @@ code {
   padding: 0;
 }
 
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.status-streaming {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.streaming-indicator {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.typing-dots,
+.inline-dots {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.typing-dots {
+  height: 24px;
+}
+
+.inline-dots {
+  gap: 3px;
+}
+
+.typing-dots span,
+.inline-dots span {
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+}
+
+.inline-dots span {
+  width: 4px;
+  height: 4px;
+}
+
+.typing-dots span:nth-child(1),
+.inline-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dots span:nth-child(2),
+.inline-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typing-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .chat-card {
   min-height: 320px;
   padding: 28px;

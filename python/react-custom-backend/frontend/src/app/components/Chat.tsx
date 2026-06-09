@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import { HumanMessage } from "@langchain/core/messages";
+import { HumanMessage } from "langchain";
 import { useStreamContext } from "@langchain/react";
 
-import type { agent } from "../../agent/index.js";
 import { MetaCard } from "./MetaCard.js";
 import { MessageList } from "./MessageList.js";
 import { MoonIcon, SunIcon } from "./ThemeIcons.js";
@@ -20,7 +19,7 @@ export function Chat({
   onNewThread: () => void;
   threadWasReset: boolean;
 }) {
-  const stream = useStreamContext<typeof agent>();
+  const stream = useStreamContext();
   const [content, setContent] = useState(EXAMPLE_PROMPT);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
@@ -60,13 +59,13 @@ export function Chat({
             </g>
           </svg>
         </div>
-        <div className="eyebrow">typescript custom backend</div>
+        <div className="eyebrow">python custom backend</div>
         <div className="hero-copy">
           <h1>React + LocalThreadSession</h1>
           <p>
             Each browser tab keeps its own thread id. Watch assistant tokens and
             tool calls stream over <code>messages</code> and <code>tools</code>{" "}
-            channels via <code>MemorySaver</code> checkpoints at{" "}
+            channels via <code>InMemorySaver</code> checkpoints at{" "}
             <code>/threads/&lt;id&gt;/…</code>.
           </p>
         </div>
