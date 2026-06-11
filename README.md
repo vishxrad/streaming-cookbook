@@ -56,18 +56,18 @@ Then fill in the provider keys listed in `.env`. The real `.env` file is ignored
 
 ## Examples
 
-Each concept below has a **TypeScript** and/or **Python** package. Most UI examples are split: a Python `langgraph dev` backend plus the existing TypeScript frontend in `typescript/`. The exception is `python/react-custom-transport`, which ships its own React UI.
+Each concept below has a **TypeScript** and/or **Python** package. Most UI examples are split: a Python `langgraph dev` backend plus the existing TypeScript frontend in `typescript/`. The exception is `python/react-custom-backend`, which ships its own React UI.
 
-| Concept | TypeScript | Python |
-| --- | --- | --- |
-| Terminal streaming scripts | `typescript/streaming` | `python/streaming` |
-| Multimodal storybook | `typescript/multimodal` | `python/multimodal` (backend) |
-| A2UI generative UI | `typescript/a2ui` | `python/a2ui` (backend) |
-| React reconnect | `typescript/ui-react` | `python/ui-react` (backend) |
-| Custom React transport | `typescript/react-custom-transport` | `python/react-custom-transport` (full stack) |
-| Angular chat | `typescript/ui-angular` | `python/ui-angular` (backend) |
-| Svelte chat | `typescript/ui-svelte` | `python/ui-svelte` (backend) |
-| Vue chat | `typescript/ui-vue` | `python/ui-vue` (backend) |
+| Concept                    | TypeScript                        | Python                                     |
+| -------------------------- | --------------------------------- | ------------------------------------------ |
+| Terminal streaming scripts | `typescript/streaming`            | `python/streaming`                         |
+| Multimodal storybook       | `typescript/multimodal`           | `python/multimodal` (backend)              |
+| A2UI generative UI         | `typescript/a2ui`                 | `python/a2ui` (backend)                    |
+| React reconnect            | `typescript/ui-react`             | `python/ui-react` (backend)                |
+| Custom React backend       | `typescript/react-custom-backend` | `python/react-custom-backend` (full stack) |
+| Angular chat               | `typescript/ui-angular`           | `python/ui-angular` (backend)              |
+| Svelte chat                | `typescript/ui-svelte`            | `python/ui-svelte` (backend)               |
+| Vue chat                   | `typescript/ui-vue`               | `python/ui-vue` (backend)                  |
 
 - TypeScript workspace overview: [`typescript/README.md`](typescript/README.md)
 - Python workspace overview: [`python/README.md`](python/README.md)
@@ -104,11 +104,11 @@ See `typescript/a2ui/README.md` for full architecture details, system prompt exp
 
 `typescript/ui-react` shows browser reconnect and replay with the standard LangGraph dev server. Start a streamed run, refresh the page while it is still loading, and the React UI reattaches to the same thread so buffered messages catch up before live events continue.
 
-#### Custom React Transport
+#### Custom React Backend
 
-`typescript/react-custom-transport` shows how to connect `@langchain/react` to your own backend transport. It serves LangGraph protocol events through a local Hono server and exposes a custom A2A projection beside the normal chat stream.
+`typescript/react-custom-backend` shows how to connect `@langchain/react` to your own Agent Protocol backend instead of `langgraph dev`. It serves commands, filtered SSE streams, and checkpointed thread state through a local Hono server, then renders token-by-token messages and tool lifecycle events in the React UI.
 
-![Custom React transport demo](assets/transport.png)
+![Custom React backend demo](assets/custom-backend.png)
 
 #### Framework Chat SDKs
 
@@ -131,7 +131,7 @@ pnpm --filter @examples/streaming subagents:remote
 pnpm dev:a2ui
 pnpm dev:multimodal
 pnpm dev:react
-pnpm dev:react-transport
+pnpm dev:react-custom-backend
 pnpm dev:angular
 pnpm dev:svelte
 pnpm dev:vue
@@ -184,17 +184,17 @@ cd python/ui-react && uv sync && uv run langgraph dev --port 2024
 cd typescript && pnpm install && pnpm dev:react
 ```
 
-#### Custom React Transport (full stack)
+#### Custom React Backend (full stack)
 
-`python/react-custom-transport` is a self-contained Python stack: `LocalThreadSession` on port `9123`, per-thread checkpoints, tool-calling agent, and a bundled React UI via `HttpAgentServerAdapter`.
+`python/react-custom-backend` is a self-contained Python stack: `LocalThreadSession` on port `9123`, per-thread checkpoints and history, tool-calling agent streams, and a bundled React UI via `HttpAgentServerAdapter`.
 
 ```bash
-cd python/react-custom-transport && uv sync && uv run python src/main.py
+cd python/react-custom-backend && uv sync && uv run python src/main.py
 # other terminal:
-cd python/react-custom-transport/frontend && npm install && npm run dev
+cd python/react-custom-backend/frontend && npm install && npm run dev
 ```
 
-See `python/react-custom-transport/README.md` for the Agent Protocol routes and thread model.
+See `python/react-custom-backend/README.md` for the Agent Protocol routes and thread model.
 
 #### Framework Chat SDKs (Python backends)
 
