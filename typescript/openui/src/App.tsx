@@ -113,7 +113,7 @@ const textOf = (message: BaseMessage): string => {
  * then stream the program as their final message — so while streaming this
  * is the partial program, and once finished it is the complete one.
  *
- * Programs start with `root` (a prompt rule), so a root-prefixed message is
+ * Programs start with `root =` (a prompt rule), so a root assignment is
  * preferred over the plain latest text — if a model slips and chats before
  * its tool calls, the chatter can't displace an actual program.
  */
@@ -125,7 +125,7 @@ const programFromMessages = (messages: BaseMessage[]): string => {
     const text = textOf(message);
     const trimmed = text.trim();
     if (trimmed === "") continue;
-    if (trimmed.startsWith("root")) return text;
+    if (/^\s*root\s*=/.test(text)) return text;
     if (fallback === "") fallback = text;
   }
   return fallback;
